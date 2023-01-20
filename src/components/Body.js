@@ -1,21 +1,50 @@
-import { restaurantList } from "../constants";
+// import { restaurantList } from "../constants";
 import RestaurantCard from "./RestaurantCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
 
 
 function filterData(searchText, restaurants){
-    const filterData = restaurantList.filter((restaurant) => 
-        restaurant.data.name.includes(searchText)
+    const filterData = restaurants.filter((restaurant) => 
+        restaurant?.data?.name?.toLowerCase().includes(searchText.toLowerCase())
     );
 
     return filterData
 }
 
 const Body = () => {
-  const [restaurants, setRestaurants] = useState(restaurantList);
+  const [allRestaurants, setAllRestaurants] = useState([])
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  return (
+  /* 
+    empty dependency array => once after render
+    deps array[search text] => once after initial render + everytime after rerender(my searchText is changes.)
+  */
+  useEffect(() => {
+    // API call
+    getRestaurants();
+  }, [])
+
+  async function getRestaurants() {
+    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.499802&lng=77.061617&page_type=DESKTOP_WEB_LISTING")
+    const json = await data.json();
+    // Optional Chaining
+    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards)
+    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards)
+  }
+
+  /* 
+  Conditional Rendering
+    If restaurant is empty => Shimmer UI
+    If restaurant has data => Load actual data UI
+  */
+
+  if(!allRestaurants) return null;
+
+  // if(filteredRestaurants?.length === 0) return <h1>No Restaurant Found.</h1>
+
+  return (allRestaurants?.length === 0) ? <Shimmer /> : (
     <>
       <div className="search-container">
         <input
@@ -28,13 +57,13 @@ const Body = () => {
           }}
         />
         <button className="search-btn" onClick = { () => {
-            const data = filterData(searchText, restaurants)
-            setRestaurants(data)
+            const data = filterData(searchText, allRestaurants)
+            setFilteredRestaurants(data)
         }
         } >Search</button>
       </div>
       <div className="restraunt-list">
-        {restaurants.map((restaurant) => {
+        {filteredRestaurants.map((restaurant) => {
           return (
             <RestaurantCard {...restaurant.data} key={restaurant.data.id} />
           );
