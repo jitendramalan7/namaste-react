@@ -1,4 +1,4 @@
-# Chapter 06 - Assignment - Exploring the world
+# Chapter 06 - Exploring the world
 
 ### Q.1 What is microservices?
 **Solution:** Microservices are an architectural and organizational approach to software development where software is composed of small independent services that communicate over well-defined APIs. These services are owned by small, self-contained teams.
