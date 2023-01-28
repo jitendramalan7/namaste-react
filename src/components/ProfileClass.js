@@ -16,33 +16,31 @@ class Profile extends React.Component {
 
     // Best place to make an API call 
     async componentDidMount(){
-        /*
-            console.log('Child - componentDidMount - ' + this.props.name)
-            const data = await fetch('https://api.github.com/users/jitendramalan7')
-            const json = await data.json()
-            console.log(json)
-            this.setState({
-                userInfo: json
-            });
-        */
+        console.log('Child - componentDidMount - ' + this.props.name)
+        const data = await fetch('https://api.github.com/users/jitendramalan7')
+        const json = await data.json()
+        console.log(json)
+        this.setState({
+            userInfo: json
+        });
 
         // this.timer = setInterval(() => {
         //     console.log("NAMASTE REACT OP ");
         // }, 1000);
-        console.log('Child - componentDidMount');
+        // console.log('Child - componentDidMount');
     }
 
     componentDidUpdate() {
-        console.log('componentDidUpdate')
+        // console.log('componentDidUpdate')
     }
 
     componentWillUnmount() {
         clearInterval(this.timer);
-        console.log('componentWillUnmount')
+        // console.log('componentWillUnmount')
     }
 
     render() {
-        console.log('Child - render - ' + this.props.name);
+        // console.log('Child - render - ' + this.props.name);
        return (
         <div>
             <h1>Profile Class Component</h1>

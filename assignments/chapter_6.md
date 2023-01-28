@@ -18,7 +18,7 @@ With monolithic architectures, all processes are tightly coupled and run as a si
 
 **`Microservices`**
 With a microservice architecture, an application is built as independent components that run each application process as a service. These services communicate via a well-defined interface using lightweight APIs. Services are built for business capabilities and each service performs a single function. Because they are independently run, each service can be updated, deployed, and scaled to meet demand for specific functions of an application.
-![alt text](../assets/img/monolithic_vs_microservices.png)
+![alt text](../src/assets/img/monolithic_vs_microservices.png)
 
 ### Q.4 Why do we need useEffect hook?
 Placing `useEffect` inside the component lets us access the local state variable (or any props) right from the effect. We don’t need a special API to read it — it’s already in the function scope.
