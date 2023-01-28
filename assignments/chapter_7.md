@@ -3,12 +3,12 @@
 ### Q.1 What are various ways to add images into our App? Explain with code examples.
 **Solution:**
 Using the full URL of the image for the web (CDN) or any public images:
-```
+```jsx
 <img src="https://yt3.googleusercontent.com/ytc/AMLnZu_EC-ECXAxRAixWGEfMsE1rdSoetBHyxmLNdtCB=s900-c-k-c0x00ffffff-no-rj" alt="Food Villa Logo" />
 ```
 The correct way to structure images in your project is to add them in an images folder. If you are using other assets than just images, you might want to add all the assets folders.
-```
-import reactLogo from "../../assets/images/reactLogo.png";
+```jsx
+import reactLogo from "../assets/images/reactLogo.png";
 export default function App() {
   return <img src={reactLogo} alt="react logo" />
 }
